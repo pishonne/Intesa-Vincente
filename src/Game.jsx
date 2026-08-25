@@ -532,7 +532,7 @@ function Game( { language } ) {
         return WORDS
     })
 
-    const [time, setTime] = useState(10)
+    const [time, setTime] = useState(60)
     const [team, setTeam] = useState(1)
     const [score, setScore] = useState(0)
     const [passes, setPasses] = useState(3)
@@ -584,7 +584,7 @@ function Game( { language } ) {
                 setScore(0)
                 setIsRunning(false)
 
-                setTime(10)
+                setTime(60)
                 getNewWord()
             } else {
                 setTeam2result(score)

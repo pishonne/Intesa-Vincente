@@ -157,8 +157,8 @@ section {
   background-color: var(--secondary);
   border: solid var(--border) 2px;
   border-radius: 50px;
-  box-shadow: 0 3px var(--shadow) ;
-  transition: 0.3s ease;
+  box-shadow: 0px 3px var(--shadow) ;
+  transition: 0.2s ease;
 }
 
 .game_button:hover {
@@ -168,7 +168,11 @@ section {
 .game_button:disabled {
   background-color: var(--primary);
   color: white;
+}
 
+.game_button:active {
+  transform: translateY(3px);
+  box-shadow: 0px 0px;
 }
 
 .game_icon {
