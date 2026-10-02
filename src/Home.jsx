@@ -18,6 +18,16 @@ function Home( { language, setLanguage, setView } ) {
                     <button className="language_select_button" onClick={() => changeLanguage("english")} style={{backgroundColor:`${language == "english" ? "var(--primary)" : "var(--secondary)"}`}}>ENGLISH</button>
                 </div>
                 <button className="game_button" onClick={() => setView("game")}>{`${language == "italiano" ? "INIZIA GIOCO" : "START GAME"}`}</button>
+
+
+                <footer>
+                    <a href="https://github.com/pishonne/Intesa-Vincente">Source Code</a>
+                    <span>-</span>
+                    <a href="https://pishonne.github.io/">Other projects</a>
+                    <span>-</span>
+                    <a href="https://buymeacoffee.com/lishonne">Buy me a coffee</a>
+                </footer>
+
             </section>
         </>
     )
