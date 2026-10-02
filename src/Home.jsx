@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import "./Home.css";
 
 function Home( { language, setLanguage, setView } ) {
 
     const changeLanguage = (language) => {
-        setLanguage(language)
+        setLanguage(language);
     }
 
     return (
@@ -23,4 +23,4 @@ function Home( { language, setLanguage, setView } ) {
     )
 }
 
-export default Home
+export default Home;

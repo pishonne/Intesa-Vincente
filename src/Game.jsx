@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import GettingReady from "./GettingReady";
 import Result from "./Result";
+import "./Game.css";
 
-
+// arrays of words in italian and english for the game
 const PAROLE = [
   // --- Oggetti ---
   "ombrello",
@@ -526,92 +527,89 @@ const WORDS = [
 
 
 function Game( { language } ) {
-    const [array, setArray] = useState(() => {
-        if(language === "italiano")
-            return PAROLE
-        return WORDS
-    })
 
-    const [time, setTime] = useState(60)
-    const [team, setTeam] = useState(1)
-    const [score, setScore] = useState(0)
-    const [passes, setPasses] = useState(3)
-    const [team1result, setTeam1result] = useState(0)
-    const [team2result, setTeam2result] = useState(0)
+    // depending on the language chosen, we choose one of the two arrays
+    const array = language === "italiano" ? PAROLE : WORDS;
+    const length = array.length;
 
-    const [word, setWord] = useState("")
-
-    const [isRunning, setIsRunning] = useState(false)
-    const [screen, setScreen] = useState("gettingready")
-
-    const length = array.length
+    const [time, setTime] = useState(60);
+    const [team, setTeam] = useState(1);
+    const [score, setScore] = useState(0);
+    const [passes, setPasses] = useState(3);
+    const [team1result, setTeam1result] = useState(0);
+    const [team2result, setTeam2result] = useState(0);
+    const [word, setWord] = useState("");
+    const [isRunning, setIsRunning] = useState(false);
+    const [screen, setScreen] = useState("gettingready");
 
     // Function to pick a new word to display
     const getNewWord = () => {
-        setWord(array[Math.floor(Math.random() * length)])
-    }
+        setWord(array[Math.floor(Math.random() * length)]);
+    };
 
     // Pause the timer if "space" is pressed
     const handleKeyDown = (e) => {
-        if (screen === "game" && e.code === "Space") setIsRunning(r => !r)
-        e.preventDefault()
+        if (screen === "game" && e.code === "Space") setIsRunning(r => !r);
+        e.preventDefault();
     }
     useEffect(() => {
-        window.addEventListener("keydown", handleKeyDown)
-        return () => window.removeEventListener("keydown", handleKeyDown)
-    }, [screen])
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [screen]);
 
     // Timer functionality
     useEffect(() => {
-        if (!isRunning) return
+        if (!isRunning) return;
         
         const countdown = setInterval(() => {
-            setTime(t => (t <= 0 ? 0 : t - 1))
-        }, 1000)
+            setTime(t => (t <= 0 ? 0 : t - 1));
+        }, 1000);
 
-        return () => clearInterval(countdown)
-    }, [isRunning])
+        return () => clearInterval(countdown);
+    }, [isRunning]);
 
-    // Executed when a round finishes
+    // When a round finishes, either the other team is prepared (all values are reset) or, if the second team just finished their turn, the final results are displayed
     useEffect(() => {
         if (time === 0) {
             if(team == 1) {
-                setScreen("gettingready")
-                setTeam(2)
-                setPasses(3)
-                setTeam1result(score)   
+                setScreen("gettingready");
+                setTeam(2);
+                setPasses(3);
+                setTeam1result(score);  
 
-                setScore(0)
-                setIsRunning(false)
+                setScore(0);
+                setIsRunning(false);
 
-                setTime(60)
-                getNewWord()
+                setTime(60);
+                getNewWord();
             } else {
-                setTeam2result(score)
-                setIsRunning(false)
-                setScreen("result")
+                setTeam2result(score);
+                setIsRunning(false);
+                setScreen("result");
             }
         }
-    }, [time])
+    }, [time]);
 
+    // method called when the timer is paused of resumed
     const pauseOrResume = () => {
         if(isRunning) {
-            setIsRunning(false)
+            setIsRunning(false);
         } else {
-            setIsRunning(true)
-            getNewWord()
+            setIsRunning(true);
+            getNewWord();
         }
     }
     
+    // reset method
     const reset = () => {
-        setScreen("gettingready")
-        setTeam(1)
-        setPasses(3)
-        setScore(0)
-        setIsRunning(false)
-        setTime(60)
-        getNewWord()
-    }
+        setScreen("gettingready");
+        setTeam(1);
+        setPasses(3);
+        setScore(0);
+        setIsRunning(false);
+        setTime(60);
+        getNewWord();
+    };
 
     return (
         <>
@@ -644,4 +642,4 @@ function Game( { language } ) {
     )
 }
 
-export default Game
+export default Game;

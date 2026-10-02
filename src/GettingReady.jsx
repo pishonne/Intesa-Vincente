@@ -1,5 +1,3 @@
-
-
 function GettingReady( {language, team, setScreen, setIsRunning, getNewWord } ) {
     return(
         <>
@@ -10,4 +8,4 @@ function GettingReady( {language, team, setScreen, setIsRunning, getNewWord } ) 
     )
 }
 
-export default GettingReady
+export default GettingReady;
