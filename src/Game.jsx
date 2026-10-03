@@ -544,6 +544,14 @@ function Game( { language } ) {
 
     // Function to pick a new word to display
     const getNewWord = () => {
+        const newWordAnimation = setInterval(() => {  
+            setWord(array[Math.floor(Math.random() * length)]);
+        }, 10);
+
+        const animationTimer = setTimeout(() => {
+            clearInterval(newWordAnimation);
+        }, 750);
+
         setWord(array[Math.floor(Math.random() * length)]);
     };
 
