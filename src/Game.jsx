@@ -550,20 +550,22 @@ function Game( { language } ) {
 
         const animationTimer = setTimeout(() => {
             clearInterval(newWordAnimation);
-        }, 750);
+        }, 500);
 
         setWord(array[Math.floor(Math.random() * length)]);
     };
 
-    // Pause the timer if "space" is pressed
+    // Pause the timer if space bar is pressed
     const handleKeyDown = (e) => {
-        if (screen === "game" && e.code === "Space") setIsRunning(r => !r);
-        e.preventDefault();
+        if (screen === "game" && e.code === "Space") {
+            e.preventDefault();
+            pauseOrResume();
+        }
     }
     useEffect(() => {
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [screen]);
+    }, [screen, isRunning]);
 
     // Timer functionality
     useEffect(() => {
